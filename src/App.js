@@ -4,18 +4,23 @@ import { Switch, Route, Link, BrowserRouter } from "react-router-dom";
 import { Provider } from 'react-redux';
 import routeConstants from './routes';
 import HomePage from './components/Homepage';
+import Navbar from './util/Navbar';
+import ApplicationDetails from './components/ApplicationDetails';
 
 function App() {
   const {
-    HOMEPAGE
+    HOMEPAGE,
+    APPLICATIONDETAILS
   } = routeConstants;
 
   return (
     <div className="App">
+      <Navbar />
       <BrowserRouter>
       <Provider store={store}>
           <Switch>
              <Route exact path={HOMEPAGE.route} component={HomePage} /> 
+             <Route exact path={APPLICATIONDETAILS.route} component={ApplicationDetails} /> 
           </Switch>         
       </Provider>
       </BrowserRouter>
