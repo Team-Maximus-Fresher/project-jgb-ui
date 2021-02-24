@@ -18,6 +18,13 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
+import { pink } from '@material-ui/core/colors';
+import {
+  fade,
+  ThemeProvider,
+  withStyles,
+  createMuiTheme,
+} from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -46,9 +53,14 @@ const useStyles = makeStyles((theme) => ({
   },
   expandOpen: {
     transform: 'rotate(180deg)',
-  }
+  },
 }));
 
+const theme = createMuiTheme({
+  palette: {
+    primary: pink,
+  },
+});
 
 export default function HomePageCard(props) {
   const classes = useStyles();
@@ -60,9 +72,9 @@ export default function HomePageCard(props) {
 
   return (
     <Card className={classes.root}>
-      <CardHeader
+      {/* <CardHeader
         title={props.config.title}
-      />
+      /> */}
         {/* <CardMedia
         className={classes.media}
         image={props.config.imageSrc}
@@ -82,6 +94,7 @@ export default function HomePageCard(props) {
 
       {/* <Collapse in={expanded} timeout="auto" unmountOnExit> */}
         <CardContent>
+          <h2>{props.config.title}</h2>
         <Container fixed>
         <form className={classes.formRoot} noValidate autoComplete="off"
         onSubmit = {
@@ -91,9 +104,11 @@ export default function HomePageCard(props) {
             }
         }
         >
+                <ThemeProvider theme={theme}>
                 <Grid container>
                     <Grid item md={12}>
                         <TextField 
+                        color = "#ae275f"
                         value={props.formHandle[props.config.inputName]}
                         onChange={
                             (e) =>{
@@ -131,6 +146,7 @@ export default function HomePageCard(props) {
                     </Button>
                     </Grid>
                 </Grid>
+                </ThemeProvider>
         </form>
         </Container>
         </CardContent>
