@@ -1,4 +1,4 @@
-import React , {useState} from 'react';
+import React , {useState , useEffect} from 'react';
 import { Box, Container, Grid} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import ApplicationCard from './ApplicationCard';
@@ -17,30 +17,35 @@ const useStyles = makeStyles((theme) => ({
         marginTop : "5px",
     },
     innerGrid : {
-        margin : "2%"
+        margin : "0.5%"
     }
 }));
 
 function ApplicationDetails(props) {
     const formData = store.getState().form 
-    if(formData.custID === undefined){
+    /* if(formData.custID === undefined){
         props.stateControl("homepage")
-    }
-    const prop = searchApplicationsByCustId(formData.custID)
+    } */
+    /* const prop = searchApplicationsByCustId(formData.custID) */
+    const [prop , setProp] = useState(undefined)
+    useEffect(() => {
+        setProp(searchApplicationsByCustId(formData.custID))
+      }, []);
     /* const prop = searchApplicationsByCustId(840000016) */
-    /* const [count, setCount] = useState(0); */
     const classes = useStyles();
-
     return (
         <div>
+            {
+            prop !== undefined ? <>
+            <h3 style={{marginLeft: "3%"}} align="left">Showing results ({prop.length})</h3>
             <div className={classes.root}>
-            <Container fixed>
+            <Container /* fixed */ maxWidth="xl">
             <Grid container className={classes.boxStyle}>
-                <Grid item md={12} className={classes.outerGrid}>
+                <Grid item md={12} sm={12} xs={12} className={classes.outerGrid}>
                 {
                         prop.map(applicationData =>{
                             return (
-                                <Grid item md={12} className={classes.innerGrid}>
+                                <Grid item className={classes.innerGrid}>
                                     <ApplicationCard data={applicationData}/>
                                 </Grid>
                             )
@@ -49,7 +54,9 @@ function ApplicationDetails(props) {
                 </Grid>
             </Grid>
             </Container>
-            </div>
+            </div></>
+            :<></>
+            }
         </div>
     );
 }

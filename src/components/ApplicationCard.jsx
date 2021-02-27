@@ -1,4 +1,4 @@
-import React from 'react';
+import React , {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import '../assets/css/ApplicationDetails.css'
 import { Box, Container, Paper ,Card , CardContent , Typography, Grid} from '@material-ui/core';
@@ -15,14 +15,13 @@ import TableRow from '@material-ui/core/TableRow';
 
 const useStyles = makeStyles({
     root: {
-        flexGrow: 1,
+        flexGrow: 1
     },
     headText: {
         fontWeight: "700"
     },
     table: {
-        width: "100%",
-        border : ""
+        width: "100%"
     }
   });
 
@@ -38,13 +37,17 @@ function getStatusColor(inp){
 }
 
 function ApplicationCard(props) {
-    console.log(props.data)
+    /* console.log(props.data) */
+    const [selectedStep, setSelectedStep] = useState("none");
     const classes = useStyles();
+
+    var handleStepState = (e , inp) => {
+        e.preventDefault()
+        setSelectedStep(inp)
+    }
 
     return (
         <div className={classes.root}>
-            <h3 align="left">Showing results...</h3>
-
 {/*             <Accordion>
                 <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
@@ -58,9 +61,9 @@ function ApplicationCard(props) {
              <Card /* style={{borderTop : "10px solid " +  getStatusColor(props.data.state)}} */>
                 <CardContent>
                     <Grid container>
-                        <Grid item md={4}>
+                        <Grid item md={6} >
                             <Typography component="h5" align="justify">
-                           {/*  Application Reference ID : <span className={classes.headText}>{props.data.applicationReferenceId}</span>  */}{/* <br />
+                            Application Reference ID : <span className={classes.headText}>{props.data.applicationReferenceId}</span>{/* <br />
                             Product Code : <span className={classes.headText}>{props.data.productCode}</span> <br /> */}
                             </Typography>
                         </Grid>
@@ -77,16 +80,23 @@ function ApplicationCard(props) {
                             </Typography>
                         </Grid> */}
                     </Grid>
-                        <TableContainer component={Paper}>
-                            <Table className={classes.table}>
-                                <TableBody>
-                                <TableRow>
+                    <Grid container>
+                        <Grid item md={8} sm={12}>
+                        <TableContainer /* component={Paper} */ className={classes.table} >
+                            <Table >
+                                <TableBody >
+                                <TableRow >
                                 <div id="crumbs" >
                                     <ul>
                                         {
                                             props.data.applicationStateLogs.map(stateLog =>{
+                                                var selectedStepColor = {}
+                                                if(stateLog._id === selectedStep){selectedStepColor = {backgroundColor : "#FFC1C1"}}
                                                 return (
-                                                    <td><li><a href="#" style={{color : getStatusColor(stateLog.status)}}>{stateLog._id}</a></li></td>
+                                                    
+                                                    <td><li><a style={{color : getStatusColor(stateLog.status) , ...selectedStepColor}}onClick={ 
+                                                        e =>{handleStepState(e , stateLog._id)}
+                                                    } href="#" >{stateLog._id}</a></li></td>
                                                 )
                                             })
                                         }
@@ -96,6 +106,33 @@ function ApplicationCard(props) {
                                 </TableBody>
                                 </Table>
                         </TableContainer>
+                        </Grid>
+                        <Grid item md={4} sm={12}>
+                        <TableContainer /* component={Paper} */ className={classes.table} >
+                        <Table >
+                            <TableBody >
+                                {
+                                    /* console.log(props.data.applicationStateLogs) */
+                                    props.data.applicationStateLogs.map( step => {
+                                        return (
+                                        step._id === selectedStep /* && step.input !== undefined */?
+                                        Object.keys(step).map(function (keyName, keyIndex) {
+                                            console.log(step[keyName])
+                                            return (
+                                                <TableRow>
+                                                    <TableCell>{keyName}</TableCell>
+                                                    <TableCell>{JSON.stringify(step[keyName])}</TableCell> 
+                                                </TableRow>
+                                            )
+                                        })
+                                        : <></>
+                                    )})   
+                                }
+                            </TableBody>
+                        </Table>
+                        </TableContainer>
+                        </Grid>
+                    </Grid>
                 </CardContent>
             </Card>
         {/* </AccordionDetails>

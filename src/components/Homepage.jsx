@@ -43,7 +43,7 @@ function Homepage(props) {
             </Container>
             </div>
             :
-            <ApplicationDetails formData={props} stateControl={setPageName}/>
+            <ApplicationDetails formData={props} /* stateControl={setPageName} *//>
             }
             
         </div>

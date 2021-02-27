@@ -70,11 +70,11 @@
   }
   
   #crumbs ul td li a:hover {
-    background: #357dfd;
+    background: #FFC1C1;
     color: #fff;
   }
-  
+
   #crumbs ul td li a:hover:after {
-    border-left-color: #357dfd;
+    border-left-color: #FFC1C1;
     color: #fff;
   }

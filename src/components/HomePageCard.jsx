@@ -95,7 +95,7 @@ export default function HomePageCard(props) {
       {/* <Collapse in={expanded} timeout="auto" unmountOnExit> */}
         <CardContent>
           <h2>{props.config.title}</h2>
-        <Container fixed>
+        <Container /* fixed */ maxWidth="xs">
         <form className={classes.formRoot} noValidate autoComplete="off"
         onSubmit = {
             (e) =>{
@@ -106,7 +106,7 @@ export default function HomePageCard(props) {
         >
                 <ThemeProvider theme={theme}>
                 <Grid container>
-                    <Grid item md={12}>
+                    <Grid item xs={12}>
                         <TextField 
                         color = "#ae275f"
                         value={props.formHandle[props.config.inputName]}
@@ -117,7 +117,7 @@ export default function HomePageCard(props) {
                         }
                         id="filled-basic" label={props.config.inputLabel} variant="filled" className={classes.formControl} required={true}/>
                     </Grid>
-                    <Grid item md={12}>
+                    <Grid item xs={12}>
                     <FormControl variant="filled" className={classes.formControl} required>
                         <InputLabel id="demo-simple-select-filled-label">Product Code</InputLabel>
                         <Select
@@ -140,7 +140,7 @@ export default function HomePageCard(props) {
                         </Select>
                     </FormControl>
                     </Grid>
-                    <Grid item md={12}>
+                    <Grid item xs={12}>
                     <Button variant="contained" className={classes.formControl} type="submit" style={{backgroundColor : "#ae275f" , color : "white"}}>
                         SUBMIT
                     </Button>
