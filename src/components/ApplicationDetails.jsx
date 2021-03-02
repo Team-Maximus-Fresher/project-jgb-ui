@@ -2,6 +2,8 @@ import React , {useState , useEffect} from 'react';
 import { Box, Container, Grid} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import ApplicationCard from './ApplicationCard';
+import ApplicationCard1 from './ApplicationCard1';
+import ApplicationCard2 from './ApplicationCard2';
 import { searchApplicationsByCustId } from '../fetchData/endpoints';
 import store from '../store'
 
@@ -18,7 +20,20 @@ const useStyles = makeStyles((theme) => ({
     },
     innerGrid : {
         margin : "0.5%"
-    }
+    },
+    '@global': {
+        '*::-webkit-scrollbar': {
+          width: '0.4em',
+          height: '0.4em'
+        },
+        '*::-webkit-scrollbar-track': {
+          '-webkit-box-shadow': 'inset 0 0 6px rgba(249, 178, 178 ,0.00)'
+        },
+        '*::-webkit-scrollbar-thumb': {
+          backgroundColor: 'rgba(0,0,0,.1)',
+          outline: '1px solid slategrey'
+        }
+      }
 }));
 
 function ApplicationDetails(props) {
@@ -27,6 +42,7 @@ function ApplicationDetails(props) {
         props.stateControl("homepage")
     } */
     /* const prop = searchApplicationsByCustId(formData.custID) */
+    const [selectedStep, setSelectedStep] = useState({});
     const [prop , setProp] = useState(undefined)
     useEffect(() => {
         setProp(searchApplicationsByCustId(formData.custID))
@@ -46,7 +62,9 @@ function ApplicationDetails(props) {
                         prop.map(applicationData =>{
                             return (
                                 <Grid item className={classes.innerGrid}>
-                                    <ApplicationCard data={applicationData}/>
+                                    <ApplicationCard data={applicationData} selectedStep={selectedStep} setSelectedStep={setSelectedStep}/>
+                                   {/*  <ApplicationCard1 data={applicationData} selectedStep={selectedStep} setSelectedStep={setSelectedStep}/> */}
+                                    {/* <ApplicationCard2 data={applicationData} selectedStep={selectedStep} setSelectedStep={setSelectedStep}/> */}
                                 </Grid>
                             )
                         })

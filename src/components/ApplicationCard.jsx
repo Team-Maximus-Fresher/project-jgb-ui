@@ -12,6 +12,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import Collapse from '@material-ui/core/Collapse';
 
 const useStyles = makeStyles({
     root: {
@@ -25,6 +26,7 @@ const useStyles = makeStyles({
     }
   });
 
+  
 function getStatusColor(inp){
     var statusColor;
     switch(inp){
@@ -32,33 +34,33 @@ function getStatusColor(inp){
         case "COMPLETE" : statusColor = "green" ; break;
         case "NEW" : statusColor = "orange" ; break;
         case "REJECT" : statusColor = "red" ; break;
+        case "TRIGGERED" : statusColor = "grey" ; break;
     }
     return statusColor;
 }
 
-function ApplicationCard(props) {
-    /* console.log(props.data) */
-    const [selectedStep, setSelectedStep] = useState("none");
-    const classes = useStyles();
 
-    var handleStepState = (e , inp) => {
+function ApplicationCard(props) {
+    const classes = useStyles();
+          
+    var handleStepState = (e , input) => {
         e.preventDefault()
-        setSelectedStep(inp)
-    }
+        if(input === props.selectedStep.stepId && props.data.applicationReferenceId === props.selectedStep.applicationID){
+            props.setSelectedStep({})
+        } 
+        else{
+            props.setSelectedStep(
+                {
+                    ...props.selectedStep,
+                    applicationID : props.data.applicationReferenceId,
+                    stepId : input
+                }
+            )}
+        }
 
     return (
         <div className={classes.root}>
-{/*             <Accordion>
-                <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel1a-content"
-                id="panel1a-header"
-                >
-                <Typography component="h5">Application 1 : {props.data.applicationReferenceId}</Typography>
-                </AccordionSummary>
-                <AccordionDetails> */}
-    
-             <Card /* style={{borderTop : "10px solid " +  getStatusColor(props.data.state)}} */>
+             <Card>
                 <CardContent>
                     <Grid container>
                         <Grid item md={6} >
@@ -81,56 +83,75 @@ function ApplicationCard(props) {
                         </Grid> */}
                     </Grid>
                     <Grid container>
-                        <Grid item md={8} sm={12}>
-                        <TableContainer /* component={Paper} */ className={classes.table} >
+                        <Grid item md={12} sm={12} >
+                        <TableContainer className={classes.table}>
                             <Table >
                                 <TableBody >
                                 <TableRow >
-                                <div id="crumbs" >
-                                    <ul>
-                                        {
-                                            props.data.applicationStateLogs.map(stateLog =>{
-                                                var selectedStepColor = {}
-                                                if(stateLog._id === selectedStep){selectedStepColor = {backgroundColor : "#FFC1C1"}}
-                                                return (
-                                                    
-                                                    <td><li><a style={{color : getStatusColor(stateLog.status) , ...selectedStepColor}}onClick={ 
-                                                        e =>{handleStepState(e , stateLog._id)}
-                                                    } href="#" >{stateLog._id}</a></li></td>
-                                                )
-                                            })
-                                        }
-                                    </ul>
-                                </div>
+                                <ul id="breadcrumb" > 
+                                {
+                                    props.data.applicationStateLogs.map(stateLog =>{
+                                        return (
+                                            <td>
+                                                <li>
+                                                    <a 
+                                                    style={{color : getStatusColor(stateLog.status)}} 
+                                                    onClick={e =>{handleStepState(e , stateLog._id)}} 
+                                                    href="#"
+                                                    >
+                                                    {
+
+                                                    stateLog._id
+                                                    }
+                                                    </a>
+                                                </li>
+                                            </td>
+                                        )
+                                    })
+                                }
+                                </ul>
                                 </TableRow>
                                 </TableBody>
                                 </Table>
                         </TableContainer>
-                        </Grid>
-                        <Grid item md={4} sm={12}>
-                        <TableContainer /* component={Paper} */ className={classes.table} >
+                        <TableContainer className={classes.table}>
                         <Table >
-                            <TableBody >
-                                {
-                                    /* console.log(props.data.applicationStateLogs) */
-                                    props.data.applicationStateLogs.map( step => {
-                                        return (
-                                        step._id === selectedStep /* && step.input !== undefined */?
-                                        Object.keys(step).map(function (keyName, keyIndex) {
-                                            console.log(step[keyName])
-                                            return (
-                                                <TableRow>
-                                                    <TableCell>{keyName}</TableCell>
-                                                    <TableCell>{JSON.stringify(step[keyName])}</TableCell> 
-                                                </TableRow>
-                                            )
-                                        })
-                                        : <></>
-                                    )})   
-                                }
+                        <TableBody>
+                        <TableRow>
+                            {
+                                props.data.applicationStateLogs.map( step => {
+                                    return (          
+                            <Collapse in={props.selectedStep.stepId === step._id && props.data.applicationReferenceId === props.selectedStep.applicationID}>
+                            <Paper elevation={4} className={classes.paper}>
+                            <Grid item md={12} sm={12}>
+                                <TableContainer className={classes.table} >
+                                <Table >
+                                    <TableBody >
+                                        {
+                                            step._id === props.selectedStep.stepId && props.data.applicationReferenceId === props.selectedStep.applicationID /* && step.input !== undefined */?
+                                            Object.keys(step).map(function (keyName, keyIndex) {
+                                                console.log(step[keyName])
+                                                return (
+                                                    <TableRow>
+                                                        <TableCell>{keyName}</TableCell>
+                                                        <TableCell>{JSON.stringify(step[keyName])}</TableCell> 
+                                                    </TableRow>
+                                                )
+                                            })
+                                            : <></>
+                                        }
+                                    </TableBody>
+                                </Table>
+                                </TableContainer>
+                            </Grid>
+                            </Paper>
+                            </Collapse>
+                            )})
+                            }
+                            </TableRow>
                             </TableBody>
-                        </Table>
-                        </TableContainer>
+                            </Table>
+                            </TableContainer>
                         </Grid>
                     </Grid>
                 </CardContent>
