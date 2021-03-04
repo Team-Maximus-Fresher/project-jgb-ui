@@ -19,9 +19,9 @@ function App() {
       <BrowserRouter>
       <Provider store={store}>
           <Switch>
-             <Route exact path={HOMEPAGE.route} component={HomePage} /> 
-             <Route exact path={APPLICATIONDETAILS.route} component={ApplicationDetails} /> 
-          </Switch>         
+             <Route exact path={HOMEPAGE.route} component={HomePage} />
+             <Route exact path={APPLICATIONDETAILS.route} component={ApplicationDetails} />
+          </Switch>
       </Provider>
       </BrowserRouter>
     </div>
