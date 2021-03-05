@@ -7,6 +7,7 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import '../assets/css/Navbar.css'
+import logo from '../assets/images/logo2.png';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -21,6 +22,7 @@ export default function Navbar() {
     <div className={classes.root}>
       <AppBar position="static" class="navbarStyle" >
         <Toolbar>
+        <img src={logo} width="50" style={{marginRight:"5px"}} />
           <Typography variant="h6">
             Project Journey Graph Board
           </Typography>

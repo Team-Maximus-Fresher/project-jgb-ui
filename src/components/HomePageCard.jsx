@@ -134,9 +134,11 @@ export default function HomePageCard(props) {
                         <MenuItem value="">
                             <em>None</em>
                         </MenuItem>
-                        <MenuItem value="PROD001">PROD001</MenuItem>
-                        <MenuItem value="PROD002">PROD002</MenuItem>
-                        <MenuItem value="PROD003">PROD003</MenuItem>
+                        {props.config.productCodeOptions.map(option =>{
+                            return(
+                              <MenuItem value={option}>{option}</MenuItem>
+                            )
+                        })}
                         </Select>
                     </FormControl>
                     </Grid>

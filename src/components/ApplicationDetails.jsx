@@ -1,13 +1,28 @@
 import React , {useState , useEffect} from 'react';
-import { Box, Container, Grid} from '@material-ui/core';
+import { Box, Container, Grid , Paper} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import ApplicationCard from './ApplicationCard';
 import ApplicationCard1 from './ApplicationCard1';
 import ApplicationCard2 from './ApplicationCard2';
 import { searchApplicationsByCustId } from '../fetchData/endpoints';
 import store from '../store'
+import ErrorComponent from '../util/ErrorComponent';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
+    '@global': {
+      '*::-webkit-scrollbar': {
+        width: '0.4em',
+        height: '0.4em'
+      },
+      '*::-webkit-scrollbar-track': {
+        '-webkit-box-shadow': 'inset 0 0 6px rgba(249, 178, 178 ,0.00)'
+      },
+      '*::-webkit-scrollbar-thumb': {
+        backgroundColor: 'rgba(0,0,0,.1)',
+        outline: '1px solid slategrey'
+      }
+    },
     root: {
       flexGrow: 1,
     },
@@ -21,38 +36,33 @@ const useStyles = makeStyles((theme) => ({
     innerGrid : {
         margin : "0.5%"
     },
-    '@global': {
-        '*::-webkit-scrollbar': {
-          width: '0.4em',
-          height: '0.4em'
-        },
-        '*::-webkit-scrollbar-track': {
-          '-webkit-box-shadow': 'inset 0 0 6px rgba(249, 178, 178 ,0.00)'
-        },
-        '*::-webkit-scrollbar-thumb': {
-          backgroundColor: 'rgba(0,0,0,.1)',
-          outline: '1px solid slategrey'
-        }
-      }
+    backNav : {
+        padding : "2px"
+    }
 }));
 
+function reloadPage(){
+  window.location.reload()
+}
+
+
 function ApplicationDetails(props) {
+    
     const formData = store.getState().form 
-    /* if(formData.custID === undefined){
-        props.stateControl("homepage")
-    } */
-    /* const prop = searchApplicationsByCustId(formData.custID) */
     const [selectedStep, setSelectedStep] = useState({});
-    const [prop , setProp] = useState(undefined)
-    useEffect(() => {
-        setProp(searchApplicationsByCustId(formData.custID))
-      }, []);
-    /* const prop = searchApplicationsByCustId(840000016) */
+    const [prop , setProp] = useState([])
     const classes = useStyles();
+
+    useEffect(() => {
+        setProp(searchApplicationsByCustId(formData.custID , formData.productCode))
+      }, []);
+
     return (
         <div>
             {
-            prop !== undefined ? <>
+            prop.length > 0 ?
+            <>
+            <Paper className={classes.backNav} elevation={1} ><Link onClick={reloadPage} >CLICK HERE TO GO BACK</Link></Paper>
             <h3 style={{marginLeft: "3%"}} align="left">Showing results ({prop.length})</h3>
             <div className={classes.root}>
             <Container /* fixed */ maxWidth="xl">
@@ -63,7 +73,7 @@ function ApplicationDetails(props) {
                             return (
                                 <Grid item className={classes.innerGrid}>
                                     <ApplicationCard data={applicationData} selectedStep={selectedStep} setSelectedStep={setSelectedStep}/>
-                                   {/*  <ApplicationCard1 data={applicationData} selectedStep={selectedStep} setSelectedStep={setSelectedStep}/> */}
+                                    {/*  <ApplicationCard1 data={applicationData} selectedStep={selectedStep} setSelectedStep={setSelectedStep}/> */}
                                     {/* <ApplicationCard2 data={applicationData} selectedStep={selectedStep} setSelectedStep={setSelectedStep}/> */}
                                 </Grid>
                             )
@@ -73,7 +83,10 @@ function ApplicationDetails(props) {
             </Grid>
             </Container>
             </div></>
-            :<></>
+            :
+            <>
+              <ErrorComponent data={prop}/>
+            </>
             }
         </div>
     );

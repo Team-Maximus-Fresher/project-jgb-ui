@@ -6,6 +6,7 @@ import routeConstants from './routes';
 import HomePage from './components/Homepage';
 import Navbar from './util/Navbar';
 import ApplicationDetails from './components/ApplicationDetails';
+import PageNotFound from './components/PageNotFound';
 
 function App() {
   const {
@@ -20,7 +21,8 @@ function App() {
       <Provider store={store}>
           <Switch>
              <Route exact path={HOMEPAGE.route} component={HomePage} /> 
-             <Route exact path={APPLICATIONDETAILS.route} component={ApplicationDetails} /> 
+             <Route exact path={APPLICATIONDETAILS.route} component={ApplicationDetails} />
+             <Route component={PageNotFound} />
           </Switch>         
       </Provider>
       </BrowserRouter>

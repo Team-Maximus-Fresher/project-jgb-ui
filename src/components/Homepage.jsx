@@ -26,7 +26,8 @@ function Homepage(props) {
         title : "Search by Customer ID",
         imageSrc : "https://miro.medium.com/max/1600/1*T5j7aqOF32G2eSR1HwnUvg.jpeg",
         inputLabel : "Enter Customer ID",
-        inputName : "custID"
+        inputName : "custID",
+        productCodeOptions : ["PERSONAL"]
     }
 
     return (
