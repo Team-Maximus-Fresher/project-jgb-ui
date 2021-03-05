@@ -1,7 +1,7 @@
 import { FormReducer } from "../reducer/FormReducer";
 import { FormAction } from "../actions/FormAction";
 
-it("should add course when passed CREATE_COURSE_SUCCESS", () => {
+it("should add form to SET_FORM", () => {
     // arrange
     const initialState = [
       {
@@ -26,7 +26,7 @@ it("should add course when passed CREATE_COURSE_SUCCESS", () => {
 
     // assert
     expect(newState.length).toEqual(3);
-    expect(newState[0].title).toEqual("A");
-    expect(newState[1].title).toEqual("B");
-    expect(newState[2].title).toEqual("C");
+    expect(newState[0].custID).toEqual("840000016");
+    expect(newState[1].custID).toEqual("840000017");
+    expect(newState[2].custID).toEqual("840000018");
   });
