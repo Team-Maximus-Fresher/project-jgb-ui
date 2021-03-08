@@ -3,15 +3,15 @@ import store from './store'
 import { Switch, Route, Link, BrowserRouter } from "react-router-dom";
 import { Provider } from 'react-redux';
 import routeConstants from './routes';
-import HomePage from './components/Homepage';
+import SearchByCustID from './components/SearchByCustID';
 import Navbar from './util/Navbar';
-import ApplicationDetails from './components/ApplicationDetails';
 import PageNotFound from './components/PageNotFound';
+import SearchByMobileNo from './components/SearchByMobileNo';
 
 function App() {
   const {
-    HOMEPAGE,
-    APPLICATIONDETAILS
+    SEARCHBYCUSTID,
+    SEARCHBYMOBILENO
   } = routeConstants;
 
   return (
@@ -20,8 +20,8 @@ function App() {
       <BrowserRouter>
       <Provider store={store}>
           <Switch>
-             <Route exact path={HOMEPAGE.route} component={HomePage} /> 
-             <Route exact path={APPLICATIONDETAILS.route} component={ApplicationDetails} />
+             <Route exact path={SEARCHBYCUSTID.route} component={SearchByCustID} /> 
+             <Route exact path={SEARCHBYMOBILENO.route} component={SearchByMobileNo} /> 
              <Route component={PageNotFound} />
           </Switch>         
       </Provider>

@@ -1,10 +1,11 @@
 import React , {useState} from 'react';
 import { Box, Container, Grid} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import HomePageCard from './HomePageCard';
+import InputCard from './InputCard';
 import {setForm} from '../actions/FormAction';
 import { connect } from 'react-redux';
 import ApplicationDetails from './ApplicationDetails';
+import { searchApplicationsByMobileNo } from '../fetchData/endpoints';
 /* import { spacing } from '@material-ui/system';
 import { borders } from '@material-ui/system'; */
 
@@ -18,33 +19,37 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-function Homepage(props) {
+function SearchByMobileNo(props) {
 
-    const [ pageName , setPageName] = useState("homepage");
+    const [ pageName , setPageName] = useState("SearchByMobileNo");
     const classes = useStyles();
-    const searchByCustIdConfig = {
-        title : "Search by Customer ID",
+    const searchByMobileNoConfig = {
+        title : "Search by Mobile Number",
         imageSrc : "https://miro.medium.com/max/1600/1*T5j7aqOF32G2eSR1HwnUvg.jpeg",
-        inputLabel : "Enter Customer ID",
-        inputName : "custID",
-        productCodeOptions : ["PERSONAL"]
+        inputLabel : "Enter Mobile Number",
+        inputName : "id",
+        productCodeOptions : ["PERSONAL"],
+        redirection : {
+            link : "/",
+            text : "Search by Customer ID"
+        } 
     }
 
     return (
         <div>
             {
-            pageName === "homepage" ?
+            pageName === "SearchByMobileNo" ?
             <div className={classes.root}>
             <Container fixed>
             <Grid container>
                 <Grid item md={12} className={classes.outerGrid} align="center">
-                    <HomePageCard config={searchByCustIdConfig} formHandle={props} stateControl={setPageName}/>
+                    <InputCard config={searchByMobileNoConfig} formHandle={props} stateControl={setPageName}/>
                 </Grid>
             </Grid>
             </Container>
             </div>
             :
-            <ApplicationDetails formData={props} /* stateControl={setPageName} *//>
+            <ApplicationDetails endpointConfig={searchApplicationsByMobileNo}/>
             }
             
         </div>
@@ -53,5 +58,5 @@ function Homepage(props) {
 
 const mapStatetoProps = state => ({})
 
-export default connect(mapStatetoProps, { setForm })(Homepage);
-/* export default Homepage; */
+export default connect(mapStatetoProps, { setForm })(SearchByMobileNo);
+/* export default SearchByMobileNo; */

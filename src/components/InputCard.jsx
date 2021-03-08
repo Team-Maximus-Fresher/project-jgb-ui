@@ -96,7 +96,7 @@ export default function HomePageCard(props) {
         <CardContent>
           <h2>{props.config.title}</h2>
         <Container /* fixed */ maxWidth="xs">
-        <form className={classes.formRoot} noValidate autoComplete="off"
+        <form className={classes.formRoot} autoComplete="off"
         onSubmit = {
             (e) =>{
                e.preventDefault();
@@ -121,6 +121,7 @@ export default function HomePageCard(props) {
                     <FormControl variant="filled" className={classes.formControl} required>
                         <InputLabel id="demo-simple-select-filled-label">Product Code</InputLabel>
                         <Select
+                        required={true}
                         labelId="demo-simple-select-filled-label"
                         id="demo-simple-select-filled"
                         value={props.formHandle["productCode"]}
@@ -129,7 +130,6 @@ export default function HomePageCard(props) {
                                 props.formHandle.setForm("productCode" , e.target.value)
                             }
                         }
-                        
                         >
                         <MenuItem value="">
                             <em>None</em>
@@ -147,6 +147,14 @@ export default function HomePageCard(props) {
                         SUBMIT
                     </Button>
                     </Grid>
+                    {
+                      props.config.redirection !== undefined ?
+                      <Grid item xs={12}>
+                        <a href={props.config.redirection.link}>{props.config.redirection.text}</a>
+                      </Grid>
+                      :
+                      <></>
+                    }
                 </Grid>
                 </ThemeProvider>
         </form>

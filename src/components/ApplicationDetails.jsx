@@ -4,7 +4,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import ApplicationCard from './ApplicationCard';
 import ApplicationCard1 from './ApplicationCard1';
 import ApplicationCard2 from './ApplicationCard2';
-import { searchApplicationsByCustId } from '../fetchData/endpoints';
 import store from '../store'
 import ErrorComponent from '../util/ErrorComponent';
 import { Link } from 'react-router-dom';
@@ -54,7 +53,7 @@ function ApplicationDetails(props) {
     const classes = useStyles();
 
     useEffect(() => {
-        setProp(searchApplicationsByCustId(formData.custID , formData.productCode))
+        setProp(props.endpointConfig(formData.id , formData.productCode))
       }, []);
 
     return (

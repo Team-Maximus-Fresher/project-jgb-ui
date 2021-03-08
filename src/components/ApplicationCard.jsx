@@ -55,9 +55,24 @@ function ApplicationCard(props) {
              <Card>
                 <CardContent>
                     <Grid container>
-                        <Grid item md={6} >
-                            <Typography component="h5" align="justify">
+                        <Grid item lg={3} sm={6}>
+                            <Typography component="h5" align="left">
                             Application Reference ID : <span className={classes.headText}>{props.data.applicationReferenceId}</span>
+                            </Typography>
+                        </Grid>
+                        <Grid item lg={3} sm={6}>
+                            <Typography component="h5" align="left">
+                            Application Date : <span className={classes.headText}>{props.data.applicationDate}</span>
+                            </Typography>
+                        </Grid>
+                        <Grid item lg={3} sm={6}>
+                            <Typography component="h5" align="left">
+                            State : <span className={classes.headText}>{props.data.state}</span>
+                            </Typography>
+                        </Grid>
+                        <Grid item lg={3} sm={6}>
+                            <Typography component="h5" align="left">
+                            Journey Code : <span className={classes.headText}>{props.data.journeyCode}</span>
                             </Typography>
                         </Grid>
                         <Grid item md={12} sm={12} >

@@ -1,8 +1,8 @@
 export default Object.freeze({
-    HOMEPAGE : {
+    SEARCHBYCUSTID : {
         route : "/"
     },
-    APPLICATIONDETAILS : {
-        route : "/applicationdetails"
+    SEARCHBYMOBILENO : {
+        route : "/mobile"
     }
 })
