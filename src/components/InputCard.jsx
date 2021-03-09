@@ -100,7 +100,7 @@ export default function HomePageCard(props) {
         onSubmit = {
             (e) =>{
                e.preventDefault();
-               props.stateControl("applicationdetails");
+               props.stateControl.setPageName("applicationdetails");
             }
         }
         >
@@ -150,7 +150,7 @@ export default function HomePageCard(props) {
                     {
                       props.config.redirection !== undefined ?
                       <Grid item xs={12}>
-                        <a href={props.config.redirection.link}>{props.config.redirection.text}</a>
+                        <a href="" onClick={()=>{props.stateControl.setHomepageConfig(props.config.redirection.config)}}>{props.config.redirection.text}</a>
                       </Grid>
                       :
                       <></>

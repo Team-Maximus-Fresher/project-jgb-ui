@@ -112,17 +112,18 @@ function ApplicationCard(props) {
                         <Grid item md={12} sm={12}>
                         {
                             props.data.applicationStateLogs.map( step => {
+                                const {id , status , ...others} = step
                             return (          
                             <Collapse in={props.selectedStep.stepId === step.id && props.data.applicationReferenceId === props.selectedStep.applicationID}>
                             <Grid container>
                             {
                                 step.id === props.selectedStep.stepId && props.data.applicationReferenceId === props.selectedStep.applicationID ?
-                                Object.keys(step).map(function (keyName, i) {
+                                Object.keys(others).map(function (keyName, i) {
                                     return (
                                         <>
                                         <Grid item md={3} sm={6} xs={12} style={{padding : "2px" , border : "1px solid lightgrey" , marginTop : "0.5px"}}>
                                             <Typography variant="p" component="p">
-                                                {keyName} : <b>{JSON.stringify(step[keyName])}</b>
+                                                {keyName} : <b>{step[keyName]}</b>
                                             </Typography>
                                         </Grid>
                                         </>

@@ -16,7 +16,4 @@ describe('Navbar', () => {
     expect(wrapper.find('img').length).toEqual(1);
   });
 
- /*  it('should render the Appbar Component', () => {
-    expect(wrapper.containsMatchingElement(<AppBar />)).toEqual(true);
-  }); */
 });
