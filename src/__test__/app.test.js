@@ -3,6 +3,7 @@ import { shallow } from 'enzyme';
 import App from '../App';
 import Navbar from '../util/Navbar';
 import { BrowserRouter } from 'react-router-dom';
+import Homepage from '../components/Homepage';
 
 describe('App', () => {
 

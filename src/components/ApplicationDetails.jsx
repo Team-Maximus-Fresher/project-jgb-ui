@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import ApplicationCard from './ApplicationCard';
 import ApplicationCard1 from './ApplicationCard1';
 import ApplicationCard2 from './ApplicationCard2';
-import store from '../store'
+import store from '../store';
 import ErrorComponent from '../util/ErrorComponent';
 import { Link } from 'react-router-dom';
 
