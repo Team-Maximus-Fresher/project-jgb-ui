@@ -1,84 +1,99 @@
 :root {
-    --breadcrumb-theme-1: #D4E6F1;
+    --breadcrumb-theme-1: #A9CCE3;
     --breadcrumb-theme-2: #FFF;
     --breadcrumb-theme-3: #A9CCE3;
     --breadcrumb-theme-4: #c70041;
 }
 
 #breadcrumb {
-  list-style: none;
-  display: inline-block;
+    list-style: none;
+    display: inline-block;
 }
 
 #breadcrumb td li {
-  float: left;
+    float: left;
 }
+
 #breadcrumb td li a {
-  color: var(--breadcrumb-theme-2);
-  display: block;
-  background: var(--breadcrumb-theme-1);
-  text-decoration: none;
-  position: relative;
-  height: 40px;
-  line-height: 40px;
-  padding: 0 10px 0 5px;
-  text-align: center;
-  margin-right: 23px;
-  font-size: 17px;
+    color: var(--breadcrumb-theme-2);
+    display: block;
+    background: var(--breadcrumb-theme-1);
+    text-decoration: none;
+    position: relative;
+    height: 40px;
+    line-height: 40px;
+    padding: 0 10px 0 5px;
+    text-align: center;
+    margin-right: 23px;
+    font-size: 17px;
 }
+
 #breadcrumb td:nth-child(even) li a {
-  background-color: var(--breadcrumb-theme-1) ;
+    background-color: var(--breadcrumb-theme-1);
 }
+
 #breadcrumb td:nth-child(even) li a:before {
-  border-color: var(--breadcrumb-theme-1) ;
-  border-left-color: transparent;
+    border-color: var(--breadcrumb-theme-1);
+    border-left-color: transparent;
 }
+
 #breadcrumb td:nth-child(even) li a:after {
-  border-left-color: var(--breadcrumb-theme-1);
+    border-left-color: var(--breadcrumb-theme-1);
 }
+
 #breadcrumb td:first-child li a {
-  padding-left: 15px;
-  -moz-border-radius: 4px 0 0 4px;
-  -webkit-border-radius: 4px;
-  border-radius: 4px 0 0 4px;
+    padding-left: 15px;
+    -moz-border-radius: 4px 0 0 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px 0 0 4px;
 }
+
 #breadcrumb td:first-child li a:before {
-  border: none;
+    border: none;
 }
+
 #breadcrumb td:last-child li a {
-  padding-right: 15px;
-  -moz-border-radius: 0 4px 4px 0;
-  -webkit-border-radius: 0;
-  border-radius: 0 4px 4px 0;
+    padding-right: 15px;
+    -moz-border-radius: 0 4px 4px 0;
+    -webkit-border-radius: 0;
+    border-radius: 0 4px 4px 0;
 }
+
 #breadcrumb td:last-child li a:after {
-  border: none;
+    border: none;
 }
-#breadcrumb td li a:before, #breadcrumb td li a:after {
-  content: "";
-  position: absolute;
-  top: 0;
-  border: 0 solid var(--breadcrumb-theme-1);
-  border-width: 20px 10px;
-  width: 0;
-  height: 0;
-}
-#breadcrumb td li a:before {
-  left: -20px;
-  border-left-color: transparent;
-}
+
+#breadcrumb td li a:before,
 #breadcrumb td li a:after {
-  left: 100%;
-  border-color: transparent;
-  border-left-color: var(--breadcrumb-theme-1);
+    content: "";
+    position: absolute;
+    top: 0;
+    border: 0 solid var(--breadcrumb-theme-1);
+    border-width: 20px 10px;
+    width: 0;
+    height: 0;
 }
+
+#breadcrumb td li a:before {
+    left: -20px;
+    border-left-color: transparent;
+}
+
+#breadcrumb td li a:after {
+    left: 100%;
+    border-color: transparent;
+    border-left-color: var(--breadcrumb-theme-1);
+}
+
 #breadcrumb td li a:hover {
-  background-color: var(--breadcrumb-theme-1);
+    background-color: var(--breadcrumb-theme-1);
 }
+
 #breadcrumb td li a:hover:before {
-  border-color: var(--breadcrumb-theme-1);
-  border-left-color: transparent;
+    border-color: var(--breadcrumb-theme-1);
+    border-left-color: transparent;
 }
+
 #breadcrumb td li a:hover:after {
-  border-left-color: var(--breadcrumb-theme-1);
+    border-left-color: var(--breadcrumb-theme-1);
 }

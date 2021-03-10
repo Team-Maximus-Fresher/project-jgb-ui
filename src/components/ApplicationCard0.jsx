@@ -92,14 +92,13 @@ function ApplicationCard(props) {
                                             <td>
                                                 <li>
                                                     <a 
-                                                    style={{color : getStatusColor(stateLog.status) , ...selectedFlagColor}} 
+                                                    style={{color : getStatusColor(stateLog.stepStatus) , ...selectedFlagColor}} 
                                                     onClick={e =>{handleStepState(e , stateLog.id)}} 
                                                     href="#"
                                                     >
                                                      {stateLog.id}
                                                     </a>
                                                 </li>
-                                                
                                             </td>
                                         )
                                     })
