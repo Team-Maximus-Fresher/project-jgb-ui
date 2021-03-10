@@ -64,8 +64,7 @@ function Homepage(props) {
                     stateControl={{
                         "setPageName" : setPageName,
                         "setHomepageConfig" : setHomepageConfig
-                    }
-                    }/>
+                    }}/>
                 </Grid>
             </Grid>
             </Container>

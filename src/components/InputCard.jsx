@@ -64,11 +64,6 @@ const theme = createMuiTheme({
 
 export default function HomePageCard(props) {
   const classes = useStyles();
-  const [expanded, setExpanded] = React.useState(false);
-
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
 
   return (
     <Card className={classes.root}>
@@ -150,7 +145,7 @@ export default function HomePageCard(props) {
                     {
                       props.config.redirection !== undefined ?
                       <Grid item xs={12}>
-                        <a href="" onClick={()=>{props.stateControl.setHomepageConfig(props.config.redirection.config)}}>{props.config.redirection.text}</a>
+                        <a href="" onClick={e=>{e.preventDefault();props.stateControl.setHomepageConfig(props.config.redirection.config)}}>{props.config.redirection.text}</a>
                       </Grid>
                       :
                       <></>

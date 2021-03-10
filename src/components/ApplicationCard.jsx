@@ -22,12 +22,17 @@ const useStyles = makeStyles({
 
 function getStatusColor(inp){
     var statusColor;
+    var green = "green"
     switch(inp){
-        case "FINISHED" : statusColor = "green" ; break;
-        case "COMPLETE" : statusColor = "green" ; break;
+        case "FINISHED" : statusColor = green ; break;
+        case "COMPLETE" : statusColor = green ; break;
+        case "AUTO_APPROVED" : statusColor = green ; break;
         case "NEW" : statusColor = "orange" ; break;
+        case "SUSPENDED" : statusColor = "red" ; break;
         case "REJECT" : statusColor = "red" ; break;
+        case "TERMINATED" : statusColor = "red" ; break;
         case "TRIGGERED" : statusColor = "grey" ; break;
+        case "SKIPPED" : statusColor = "grey" ; break;
     }
     return statusColor;
 }
@@ -52,7 +57,7 @@ function ApplicationCard(props) {
 
     return (
         <div className={classes.root}>
-             <Card>
+             <Card style={{backgroundColor: "#EAF2F8" , border: "1px solid grey"}}>
                 <CardContent>
                     <Grid container>
                         <Grid item lg={3} sm={6}>
@@ -80,6 +85,35 @@ function ApplicationCard(props) {
                                 <Table >
                                 <TableBody >
                                 <TableRow >
+                                {/* <div class="center">
+                                <div class="breadcrumb-holder">
+                                    <ul class="underlined-breadcrumbs">
+                                {
+                                    props.data.applicationStateLogs.map(stateLog =>{
+                                        var selectedFlagColor = {}
+                                        if(props.selectedStep.stepId === stateLog.id && props.data.applicationReferenceId === props.selectedStep.applicationID)
+                                        {
+                                            selectedFlagColor = {"fontWeight" : 700}
+                                        }
+                                        return (
+                                            <td>
+                                                <li>
+                                                    <a 
+                                                    style={{backgroundColor : getStatusColor(stateLog.stepStatus) , ...selectedFlagColor}} 
+                                                    onClick={e =>{handleStepState(e , stateLog.id)}} 
+                                                    href="#"
+                                                    >
+                                                     {stateLog.id}
+                                                    </a>
+                                                </li>
+                                                
+                                            </td>
+                                        )
+                                    })
+                                }
+                                </ul>
+                                    </div>
+                                </div> */}
                                 <ul id="breadcrumb"> 
                                 {
                                     props.data.applicationStateLogs.map(stateLog =>{
@@ -92,14 +126,13 @@ function ApplicationCard(props) {
                                             <td>
                                                 <li>
                                                     <a 
-                                                    style={{color : getStatusColor(stateLog.status) , ...selectedFlagColor}} 
+                                                    style={{color : getStatusColor(stateLog.stepStatus) , ...selectedFlagColor}} 
                                                     onClick={e =>{handleStepState(e , stateLog.id)}} 
                                                     href="#"
                                                     >
                                                      {stateLog.id}
                                                     </a>
                                                 </li>
-                                                
                                             </td>
                                         )
                                     })
@@ -113,7 +146,7 @@ function ApplicationCard(props) {
                         <Grid item md={12} sm={12}>
                         {
                             props.data.applicationStateLogs.map( step => {
-                                const {id , status , ...others} = step
+                                const {id , stepStatus , ...others} = step
                             return (          
                             <Collapse in={props.selectedStep.stepId === step.id && props.data.applicationReferenceId === props.selectedStep.applicationID}>
                             <Grid container>
@@ -121,13 +154,31 @@ function ApplicationCard(props) {
                                 step.id === props.selectedStep.stepId && props.data.applicationReferenceId === props.selectedStep.applicationID ?
                                 Object.keys(others).map(function (keyName, i) {
                                     return (
-                                        <>
-                                        <Grid item md={3} sm={6} xs={12} style={{padding : "2px" , border : "1px solid lightgrey" , marginTop : "0.5px"}}>
-                                            <Typography variant="p" component="p">
-                                                {keyName} : <b>{step[keyName]}</b>
-                                            </Typography>
-                                        </Grid>
-                                        </>
+                                           Array.isArray(step[keyName]) ?
+                                           <>
+                                            {
+                                              step[keyName].map(innerData => {
+                                                  return (
+                                                    <Grid item md={3} sm={6} xs={12} style={{padding : "2px" , border : "1px solid lightgrey" , marginTop : "0.5px"}}>
+                                                    <Typography variant="p" component="p">
+                                                    {
+                                                        Object.keys(innerData).map(innerDataContent => {
+                                                            return (
+                                                                    <span> {innerDataContent} : <b>{innerData[innerDataContent]}</b> <br /></span> 
+                                                            )
+                                                        })
+                                                    }
+                                                  </Typography>
+                                                  </Grid>
+                                              )})
+                                            }
+                                           </>
+                                           :
+                                           <Grid item md={3} sm={6} xs={12} style={{padding : "2px" , border : "1px solid lightgrey" , marginTop : "0.5px"}}>
+                                           <Typography variant="p" component="p">
+                                               {keyName} : <b>{step[keyName]}</b>
+                                           </Typography>
+                                           </Grid>
                                     )
                                 })
                                 : <></>
@@ -140,6 +191,7 @@ function ApplicationCard(props) {
                     </Grid>
                 </CardContent>
             </Card>
+            
         </div>
     );
 }

@@ -97,3 +97,67 @@
 #breadcrumb td li a:hover:after {
     border-left-color: var(--breadcrumb-theme-1);
 }
+
+
+/* -------------------------------------------------------- */
+
+ul {
+    list-style: none;
+}
+
+.breadcrumb-holder {
+    margin: 0 0 15px;
+    padding: 0 0 15px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.breadcrumb-holder ul {
+    display: flex;
+}
+
+.breadcrumb-holder li:last-of-type a {
+    cursor: text;
+}
+
+.breadcrumb-holder li a,
+.breadcrumb-holder li a:link,
+.breadcrumb-holder li a:visited {
+    text-decoration: none;
+    display: block;
+}
+
+.underlined-breadcrumbs li a,
+.underlined-breadcrumbs li a:link,
+.underlined-breadcrumbs li a:visited {
+    padding: 7px 10px;
+    color: #666;
+    background: rgba(0, 0, 0, 0.1);
+    border-bottom: 2px solid #cecece;
+    position: relative;
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.underlined-breadcrumbs li a:before {
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border: 2px solid white;
+    border-radius: 50%;
+    background: #cecece;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, -5px)
+}
+
+.underlined-breadcrumbs li a:hover,
+.underlined-breadcrumbs li:last-of-type a {
+    border-bottom: 2px solid #e85a7d;
+    background: #9e2745;
+    color: white;
+}
+
+.underlined-breadcrumbs li a:hover:before,
+.underlined-breadcrumbs li:last-of-type a:before {
+    background: #e85a7d;
+}
