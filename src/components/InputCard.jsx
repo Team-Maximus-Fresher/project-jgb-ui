@@ -66,6 +66,7 @@ export default function HomePageCard(props) {
   const classes = useStyles();
 
   return (
+    <div>
     <Card className={classes.root}>
       {/* <CardHeader
         title={props.config.title}
@@ -126,12 +127,12 @@ export default function HomePageCard(props) {
                             }
                         }
                         >
-                        <MenuItem value="">
+                        <MenuItem value="" key={1}>
                             <em>None</em>
                         </MenuItem>
                         {props.config.productCodeOptions.map(option =>{
                             return(
-                              <MenuItem value={option}>{option}</MenuItem>
+                              <MenuItem key={option} value={option}>{option}</MenuItem>
                             )
                         })}
                         </Select>
@@ -157,5 +158,6 @@ export default function HomePageCard(props) {
         </CardContent>
       {/* </Collapse> */}
     </Card>
+    </div>
   );
 }

@@ -31,7 +31,7 @@ const ErrorComponent = (props) => {
                 {
                     Object.keys(props.data).map(info => {
                         return (
-                            <tr>
+                            <tr key={info}>
                                 {/* <th>{info}</th> */}
                                 <th>{props.data[info]}</th>
                             </tr>

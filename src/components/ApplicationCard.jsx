@@ -20,7 +20,7 @@ const useStyles = makeStyles({
     }
   });
 
-function getStatusColor(inp){
+export function getStatusColor(inp){
     var statusColor;
     var green = "green"
     switch(inp){
@@ -123,12 +123,13 @@ function ApplicationCard(props) {
                                             selectedFlagColor = {"fontWeight" : 700}
                                         }
                                         return (
-                                            <td>
-                                                <li>
+                                            <td key={stateLog.id}>
+                                                <li key={stateLog.id}>
                                                     <a 
                                                     style={{color : getStatusColor(stateLog.stepStatus) , ...selectedFlagColor}} 
                                                     onClick={e =>{handleStepState(e , stateLog.id)}} 
                                                     href="#"
+                                                    data-testid={stateLog.id}
                                                     >
                                                      {stateLog.id}
                                                     </a>
@@ -148,7 +149,7 @@ function ApplicationCard(props) {
                             props.data.applicationStateLogs.map( step => {
                                 const {id , stepStatus , ...others} = step
                             return (          
-                            <Collapse in={props.selectedStep.stepId === step.id && props.data.applicationReferenceId === props.selectedStep.applicationID}>
+                            <Collapse key={step.id} in={props.selectedStep.stepId === step.id && props.data.applicationReferenceId === props.selectedStep.applicationID}>
                             <Grid container>
                             {
                                 step.id === props.selectedStep.stepId && props.data.applicationReferenceId === props.selectedStep.applicationID ?
